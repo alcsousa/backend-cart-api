@@ -1,0 +1,29 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "BACKEND CART API",
+        "description": "Morsum challenge",
+        "version": "0.1"
+    },
+    "paths": {
+        "/": {
+            "get": {
+                "description": "Home page",
+                "operationId": "7543eafbd16b2ef62dc4e28e6504d1f3",
+                "responses": {
+                    "default": {
+                        "description": "Welcome page"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
