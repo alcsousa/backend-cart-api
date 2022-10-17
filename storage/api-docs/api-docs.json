@@ -6,13 +6,40 @@
         "version": "0.1"
     },
     "paths": {
-        "/": {
-            "get": {
-                "description": "Home page",
-                "operationId": "7543eafbd16b2ef62dc4e28e6504d1f3",
+        "/api/v1/register": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "description": "Registers a new user",
+                "operationId": "682fc9d9ee8343ea3f2fa34b923f8722",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
-                    "default": {
-                        "description": "Welcome page"
+                    "201": {
+                        "description": "Successful operation"
+                    },
+                    "422": {
+                        "description": "Form validation errors"
                     }
                 }
             }
