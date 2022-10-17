@@ -14,7 +14,7 @@ class RegisterUserController extends Controller
      * @OA\Post(
      *     path="/api/v1/register",
      *     description="Registers a new user",
-     *     tags={"user"},
+     *     tags={"users"},
      *     @OA\RequestBody(
      *          required=true,
      *          @OA\JsonContent(

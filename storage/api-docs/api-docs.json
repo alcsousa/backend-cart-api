@@ -9,7 +9,7 @@
         "/api/v1/register": {
             "post": {
                 "tags": [
-                    "user"
+                    "users"
                 ],
                 "description": "Registers a new user",
                 "operationId": "682fc9d9ee8343ea3f2fa34b923f8722",
@@ -37,6 +37,60 @@
                 "responses": {
                     "201": {
                         "description": "Successful operation"
+                    },
+                    "422": {
+                        "description": "Form validation errors"
+                    }
+                }
+            }
+        },
+        "/api/v1/tokens": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "description": "An registered user can issue a token to make API calls",
+                "operationId": "7b08757f05c65b8778c1469537d006f1",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "device_name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "success": {
+                                        "summary": "A valid token is issued to the authenticated user",
+                                        "value": {
+                                            "access_token": "valid-token-here"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "The credentials providaded are incorrect or does not exist on the database"
                     },
                     "422": {
                         "description": "Form validation errors"

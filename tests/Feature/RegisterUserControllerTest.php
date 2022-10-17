@@ -22,6 +22,7 @@ class RegisterUserControllerTest extends TestCase
         $response->assertCreated();
         $response->assertJsonStructure(['message']);
         $response->assertJson(['message' => 'User created successfully']);
+        $response->assertHeader('content-type', 'application/json');
     }
 
     public function test_if_all_fields_are_required_when_registering_a_user()
@@ -34,5 +35,6 @@ class RegisterUserControllerTest extends TestCase
             'email' => 'The email field is required',
             'password' => 'The password field is required',
         ]);
+        $response->assertHeader('content-type', 'application/json');
     }
 }
