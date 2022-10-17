@@ -6,6 +6,89 @@
         "version": "0.1"
     },
     "paths": {
+        "/api/v1/products": {
+            "get": {
+                "tags": [
+                    "products"
+                ],
+                "description": "Get product list",
+                "operationId": "072fd15d3be55577bb08c19d19f1e75c",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Maximum number of results to return per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int",
+                            "default": 5
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns a list of products",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "success": {
+                                        "summary": "List of products",
+                                        "value": {
+                                            "data": [
+                                                {
+                                                    "id": 1,
+                                                    "name": "Product X",
+                                                    "sku": "PDTOMUTXPPZ",
+                                                    "description": "Some description here",
+                                                    "price": 123.4500000000000028421709430404007434844970703125
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid token",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "error": {
+                                        "summary": "Unauthenticated user",
+                                        "value": {
+                                            "message": "Unauthenticated."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Form validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/v1/register": {
             "post": {
                 "tags": [

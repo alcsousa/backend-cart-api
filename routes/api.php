@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\TokenController;
 use App\Http\Controllers\Api\RegisterUserController;
 use Illuminate\Support\Facades\Route;
@@ -18,3 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [RegisterUserController::class, 'register']);
 
 Route::post('/tokens', [TokenController::class, 'issueToken']);
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/products', [ProductController::class, 'index']);
+});
