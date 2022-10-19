@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\TokenController;
 use App\Http\Controllers\Api\RegisterUserController;
@@ -22,4 +23,8 @@ Route::post('/tokens', [TokenController::class, 'issueToken']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/products', [ProductController::class, 'index']);
+
+    Route::post('/carts', [CartController::class, 'createCart']);
+    Route::post('/carts/{uuid}', [CartController::class, 'addItem']);
+    Route::get('/carts/{uuid}', [CartController::class, 'viewCart']);
 });

@@ -6,6 +6,237 @@
         "version": "0.1"
     },
     "paths": {
+        "/api/v1/carts": {
+            "post": {
+                "tags": [
+                    "carts"
+                ],
+                "description": "Registers a new cart",
+                "operationId": "e2e275c2483722396fe380b18fcc77e7",
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "success": {
+                                        "summary": "Provides id of the created cart",
+                                        "value": {
+                                            "uuid": "71cca617-e92e-46ae-9394-74582ec7d00a"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid token",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "error": {
+                                        "summary": "Unauthenticated user",
+                                        "value": {
+                                            "message": "Unauthenticated."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/carts/{uuid}": {
+            "get": {
+                "tags": [
+                    "carts"
+                ],
+                "description": "Get items of cart",
+                "operationId": "634a0f6045dc19767f89b2e95fa035ad",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Cart universally unique identifier",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns a list of cart items",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "success": {
+                                        "summary": "List of cart items",
+                                        "value": {
+                                            "data": [
+                                                {
+                                                    "items": [
+                                                        {
+                                                            "name": "Product X",
+                                                            "sku": "PDTOMUTXPPZ",
+                                                            "description": "Some description here.",
+                                                            "price": 100,
+                                                            "quantity": 1
+                                                        }
+                                                    ],
+                                                    "total_items": 1,
+                                                    "total_amount": 100
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid token",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "error": {
+                                        "summary": "Unauthenticated user",
+                                        "value": {
+                                            "message": "Unauthenticated."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "error": {
+                                        "summary": "Resource not found",
+                                        "value": {
+                                            "message": "Cart not found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "carts"
+                ],
+                "description": "Add item to cart",
+                "operationId": "a506e7d1296d710ae60dc0bc9edcabb0",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Cart universally unique identifier",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "sku": {
+                                        "type": "string"
+                                    },
+                                    "quantity": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "success": {
+                                        "summary": "Provides id of the created cart",
+                                        "value": {
+                                            "uuid": "71cca617-e92e-46ae-9394-74582ec7d00a"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid token",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "error": {
+                                        "summary": "Unauthenticated user",
+                                        "value": {
+                                            "message": "Unauthenticated."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "error": {
+                                        "summary": "Resource not found",
+                                        "value": {
+                                            "message": "Cart not found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Form validation errors"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/v1/products": {
             "get": {
                 "tags": [
