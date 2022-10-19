@@ -6,6 +6,7 @@ use App\Contracts\CartOperations;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 use Ramsey\Uuid\Uuid;
 
 class Cart extends Model implements CartOperations
@@ -74,5 +75,20 @@ class Cart extends Model implements CartOperations
         }
 
         return round($total_amount, 2);
+    }
+
+    public function checkout(PaymentDetail $payment): bool
+    {
+        $this->attributes['payment_detail_id'] = $payment->id;
+        $this->attributes['checked_out_at'] = date('Y-m-d H:i:s');
+        return $this->update();
+    }
+
+    public function scopeUserCartByUuid($query, string $uuid)
+    {
+        return $query->where([
+            ['uuid', '=', $uuid],
+            ['user_id', '=', Auth::user()->id],
+        ]);
     }
 }

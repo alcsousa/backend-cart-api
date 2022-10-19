@@ -237,6 +237,127 @@
                 ]
             }
         },
+        "/api/v1/carts/{uuid}/checkout": {
+            "post": {
+                "tags": [
+                    "carts"
+                ],
+                "description": "Cart checkout",
+                "operationId": "6a8e4d4c90b0d393beda5830bcce213c",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "Cart universally unique identifier",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "card_number": {
+                                        "type": "string"
+                                    },
+                                    "card_holder": {
+                                        "type": "string"
+                                    },
+                                    "expiration_date": {
+                                        "type": "string"
+                                    },
+                                    "cvv_code": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "success": {
+                                        "summary": "Cart is checked out",
+                                        "value": {
+                                            "message": "Checkout finished successfully"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid token",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "error": {
+                                        "summary": "Unauthenticated user",
+                                        "value": {
+                                            "message": "Unauthenticated."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "error": {
+                                        "summary": "Resource not found",
+                                        "value": {
+                                            "message": "Cart not found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Form validation errors",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "error1": {
+                                        "summary": "Form validation errors",
+                                        "value": {
+                                            "message": "Error description"
+                                        }
+                                    },
+                                    "error2": {
+                                        "summary": "Cart can not be checked out again",
+                                        "value": {
+                                            "message": "This cart is closed"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/v1/products": {
             "get": {
                 "tags": [

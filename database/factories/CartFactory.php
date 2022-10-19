@@ -11,7 +11,9 @@ class CartFactory extends Factory
     {
         return [
             'uuid' => $this->faker->uuid,
-            'user_id' => User::factory()->create()->id
+            'user_id' => User::factory()->create()->id,
+            'payment_detail_id' => null,
+            'checked_out_at' => null
         ];
     }
 }

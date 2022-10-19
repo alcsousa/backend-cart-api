@@ -2,6 +2,7 @@
 
 namespace App\Contracts;
 
+use App\Models\PaymentDetail;
 use App\Models\Product;
 
 interface CartOperations
@@ -11,4 +12,5 @@ interface CartOperations
     public function addItem(Product $product, int $quantity): bool;
     public function calculateTotalItems(): int;
     public function calculateTotalAmount(): float;
+    public function checkout(PaymentDetail $payment): bool;
 }
